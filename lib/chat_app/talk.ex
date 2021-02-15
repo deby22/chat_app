@@ -23,4 +23,8 @@ defmodule ChatApp.Talk do
     |> Room.changeset(attrs)
     |> Repo.insert_or_update()
   end
+
+  def delete_room(%Room{} = room) do
+    Repo.delete(room)
+  end
 end

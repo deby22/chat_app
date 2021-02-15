@@ -17,6 +17,11 @@ defmodule ChatAppWeb.Router do
     pipe_through :browser
 
     get "/", RoomController, :index
+    get "/rooms/new", RoomController, :new
+    post "/rooms", RoomController, :create
+    get "/rooms/:id", RoomController, :show
+    get "rooms/:id/edit", RoomController, :edit
+    put "rooms/:id/edit", RoomController, :update
   end
 
   # Other scopes may use custom stacks.

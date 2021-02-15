@@ -24,7 +24,9 @@ defmodule ChatAppWeb.Router do
     # put "rooms/:id/edit", RoomController, :update
     # delete  "rooms/:id", RoomController, :delete
 
-    resources("rooms", RoomController, except: [:index])
+    resources("/rooms", RoomController, except: [:index])
+    resources("/sessions", SessionController, only: [:new, :create])
+    delete "/sign_out", SessionController, :delete
   end
 
   # Other scopes may use custom stacks.

@@ -17,6 +17,15 @@
   <div class="d-flex flex-column flex-md row align-items-center p-3 px-md-4 bg-dark">
     <h3 class="my-0 mr-md-auto font-weight-normal">
       <%= link "Chat App", to: Routes.room_path(@conn, :index), class: "navbar-brand text-light" %>
+      <%= if ChatApp.Accounts.user_signed_in(@conn) do %>
+      <nav class="text-light">
+        Signed in as:
+        <strong>
+          <%= ChatApp.Accounts.current_user(@conn).username %>
+        </strong>
+        <%= link "Sign Out", to: Routes.session_path(@conn, :delete), method: :delete, class: "btn btn-outline-primary" %>
+      </nav>
+      <% end %>
     </h3>
   </div>
 

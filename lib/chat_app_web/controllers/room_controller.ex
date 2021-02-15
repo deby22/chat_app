@@ -4,6 +4,8 @@ defmodule ChatAppWeb.RoomController do
   alias ChatApp.Talk.Room
   alias ChatApp.Talk
 
+  plug ChatAppWeb.Plugs.AuthUser when action not in [:index]
+
   def index(conn, _params) do
     rooms = Talk.list_rooms()
     render(conn, "index.html", rooms: rooms)
@@ -23,6 +25,8 @@ defmodule ChatAppWeb.RoomController do
         |> redirect(to: Routes.room_path(conn, :index))
 
       {:error, changeset} ->
+        IO.inspect(changeset)
+
         render(conn, "new.html", changeset: changeset)
     end
   end

@@ -4,7 +4,7 @@ defmodule ChatAppWeb.SessionController do
   alias ChatApp.Accounts
 
   def new(conn, _) do
-    render(conn, "new.html")
+    render(conn, "new.html", changeset: conn)
   end
 
   def create(conn, %{"session" => %{"email" => email, "password" => password}}) do
@@ -15,10 +15,10 @@ defmodule ChatAppWeb.SessionController do
         |> put_flash(:info, "You've signed in")
         |> redirect(to: Routes.room_path(conn, :index))
 
-      {:error, _} ->
+      {:error, changeset} ->
         conn
         |> put_flash(:error, "Invalid Email or Password")
-        |> render("new.html")
+        |> render("new.html", changeset: changeset)
     end
   end
 

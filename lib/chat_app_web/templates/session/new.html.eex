@@ -3,7 +3,7 @@
 
 <div class="auth-form-wrapper">
 
-<%= form_for @conn, Routes.session_path(@conn, :create), [as: :session, class: "form-signin"], fn f-> %>
+<%= form_for @changeset, Routes.session_path(@conn, :create), [as: :session, class: "form-signin"], fn f-> %>
     <div class="text-center">
         <h1> Log In</h1>
     </div>

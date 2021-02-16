@@ -4,7 +4,6 @@ defmodule ChatAppWeb.RegistrationController do
   alias ChatApp.Accounts
 
   def new(conn, _) do
-    IO.inspect(conn, label: "newwwwwwwww")
     render(conn, "new.html", changeset: conn)
   end
 
@@ -17,7 +16,6 @@ defmodule ChatAppWeb.RegistrationController do
         |> redirect(to: Routes.room_path(conn, :index))
 
       {:error, changeset} ->
-        IO.inspect(changeset, label: "xxxxxxxxxxxx")
         render(conn, "new.html", changeset: changeset)
     end
   end

@@ -1,7 +1,23 @@
 <h2><%= @room.name %></h2>
 <span><%= @room.description %></span>
-
 <div>
     <%= link "Edit", to: Routes.room_path(@conn, :edit, @room.id), class: "btn btn-default" %>
     <%= link "Delete", to: Routes.room_path(@conn, :delete, @room), method: :delete, data: [confirm: "Do you really want to Delete?"], class: "btn btn-danger" %>
 </div>
+
+
+<ul class="list-group mt-5" id="display">
+</ul>
+
+<form action="" id="message-form" class="input-group mt-3">
+    <input type="text" name="" id="message-body" class="form-control" placeholder="Input message for #<%= @room.name %>">
+    <div class="input-group-append">
+        <button class="btn btn-outline-info" id="message-btn">Send</button>
+    </div>
+
+</form>
+
+
+<script>
+window.roomId = "<%= @room.id%>";
+</script>

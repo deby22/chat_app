@@ -12,6 +12,7 @@ defmodule ChatAppWeb.RoomController do
     render(conn, "index.html", rooms: rooms)
   end
 
+  @spec new(Plug.Conn.t(), any) :: Plug.Conn.t()
   def new(conn, _params) do
     changeset = Room.changeset(%Room{}, %{})
     render(conn, "new.html", changeset: changeset)

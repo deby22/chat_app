@@ -10,6 +10,8 @@ defmodule ChatApp.Talk.Room do
 
     belongs_to :user, ChatApp.Accounts.User
 
+    has_many :messages, ChatApp.Talk.Message
+
     timestamps()
   end
 

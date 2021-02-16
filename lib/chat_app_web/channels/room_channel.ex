@@ -3,8 +3,10 @@ defmodule ChatAppWeb.RoomChannel do
 
   alias ChatApp.Repo
   alias ChatApp.Accounts.User
+  alias ChatAppWeb.Presence
 
   def join("room:" <> room_id, _params, socket) do
+    send(self(), :after_join)
     {:ok, %{channel: "room:#{room_id}"}, assign(socket, :room_id, room_id)}
   end
 
@@ -19,5 +21,33 @@ defmodule ChatAppWeb.RoomChannel do
   def get_user(socket) do
     IO.inspect(socket.assigns, label: "assigns")
     Repo.get(User, socket.assigns[:current_user_id])
+  end
+
+  def handle_in("user:typing", %{"typing" => typing}, socket) do
+    user = get_user(socket)
+
+    {:ok, _} =
+      Presence.update(socket, "user:#{user.id}", %{
+        user_id: user.id,
+        typing: typing,
+        username: user.username
+      })
+
+    {:reply, :ok, socket}
+  end
+
+  def handle_info(:after_join, socket) do
+    push(socket, "presence_state", Presence.list(socket))
+
+    user = get_user(socket)
+
+    {:ok, _} =
+      Presence.track(socket, "user:#{user.id}", %{
+        typing: false,
+        user_id: user.id,
+        username: user.username
+      })
+
+    {:noreply, socket}
   end
 end

@@ -5,17 +5,29 @@
     <%= link "Delete", to: Routes.room_path(@conn, :delete, @room), method: :delete, data: [confirm: "Do you really want to Delete?"], class: "btn btn-danger" %>
 </div>
 
+<div class="row">
+    <div class="column-9 col-md-9">
+        <ul class="list-group mt-5" id="display">
+        </ul>
 
-<ul class="list-group mt-5" id="display">
-</ul>
-
-<form action="" id="message-form" class="input-group mt-3">
-    <input type="text" name="" id="message-body" class="form-control" placeholder="Input message for #<%= @room.name %>">
-    <div class="input-group-append">
-        <button class="btn btn-outline-info" id="message-btn">Send</button>
+        <form action="" id="message-form" class="input-group mt-3">
+            <input type="text" name="" id="message-body" class="form-control" placeholder="Input message for #<%= @room.name %>">
+            <div class="input-group-append">
+                <button class="btn btn-outline-info" id="message-btn">Send</button>
+            </div>
+        </form>
     </div>
-
-</form>
+    <div class="column-3 col-md-3">
+        <div class="card">
+            <div class="card-header text-white bg-secondary">
+                Users Online:
+            </div>
+            <div class="card-body">
+                <div id="users-online"></div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <script>
